@@ -4,7 +4,7 @@ import {useSelector, useDispatch} from 'react-redux';
 
 function Submit() {
   return (
-    <p> Submit </p>
+    <p> The recommendation are ... </p>
   )
 }
 

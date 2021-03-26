@@ -5,6 +5,7 @@ import StartPage from './StartPage';
 import Page1 from './Page1';
 import Page2 from './Page2';
 import Submit from './Submit';
+import './index.css';
 
 
 function renderSwitch(page) {
@@ -22,9 +23,10 @@ function renderSwitch(page) {
 
 function UserForm() {
   let currPage = useSelector(state => state.currPage);
-  
   return renderSwitch(currPage);
 }
     
 
 export default UserForm;
+
+
