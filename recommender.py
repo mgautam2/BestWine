@@ -1,5 +1,6 @@
 import json
 import math
+import expert_recommender as expert
 
 activity_map = dict({'Party': ['Popping Bottles', 'Party Wine'],
                      'Gift': ['Winning Over the Boss', 'Host/Hostess Gifting'],
@@ -105,4 +106,6 @@ def main():
         wineScoreList = createWineDict(wineList)
         scoreWinesPerActivity(request, wineList, wineScoreList)
         print(wineScoreList)
+    
+    expert.calculateExpertRec()
 main()
