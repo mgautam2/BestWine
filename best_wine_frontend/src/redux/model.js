@@ -1,10 +1,8 @@
-
 const initState = {
   currPage : 0,
-  winePreference : "",
-  budget : ""
+  winePreference : '',
+  budget : ''
 }
-
 
 export default function githubData (state = initState, action) {
     

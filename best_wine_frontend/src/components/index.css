@@ -3,14 +3,14 @@
   flex-direction : column;
   align-items: center;
   justify-content: center;
-  width : 80%;
-  height: 80vh;
+  width : 65%;
+  height: 90vh;
   margin: auto;
   border : 1px red dotted;
 }
 
 .formDiv {
-  width: 80%;
+  width: 85%;
   height: 80%;
   /*  Align Item properly */
   border : 4px black solid;

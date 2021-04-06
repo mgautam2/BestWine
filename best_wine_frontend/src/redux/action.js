@@ -1,14 +1,14 @@
 
 export function incrementPage() {
   return ({
-    type : "changePage",
+    type : 'changePage',
     payload : 1
   })
 }
 
 export function decrementPage() {
   return ({
-    type : "changePage",
+    type : 'changePage',
     payload : -1
   })
 }

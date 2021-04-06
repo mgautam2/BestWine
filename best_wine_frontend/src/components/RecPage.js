@@ -10,7 +10,7 @@ import data from './info.json'
 
 import {incrementPage, decrementPage } from '../redux/action';
 
-function Page2() {
+function RecPage() {
   let dispatch = useDispatch();
   
   function handleNext() {
@@ -51,13 +51,6 @@ function Page2() {
           >
             Back
           </Button>
-          <Button
-            color="primary"
-            variant="contained"
-            onClick={handleNext}
-          >
-            Next
-          </Button>
       </div>
       </div>
     </div>
@@ -74,4 +67,4 @@ function createWineTiles(winesInfo) {
 
 
 
-export default Page2;
+export default RecPage;

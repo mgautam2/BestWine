@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 
 import StartPage from './StartPage';
-import Page1 from './Page1';
-import Page2 from './Page2';
+import { Question1, Question2, Question3 } from './Questions/';
+import RecPage from './RecPage';
 import Submit from './Submit';
 import './index.css';
 
@@ -11,13 +11,15 @@ import './index.css';
 function renderSwitch(page) {
    switch(page) {
     case 0:
-      return (<StartPage/>);
-    case 1:
-      return (<Page1/>);
+      return (<StartPage />);
+    case 1: 
+      return (<Question1 />);
     case 2:
-      return (<Page2/>);
+      return (<Question2 />);
     case 3:
-      return (<Submit/>);
+      return (<Question3 />);
+    case 4:
+      return (<RecPage />);
   }
 } 
 
@@ -26,7 +28,4 @@ function UserForm() {
   return renderSwitch(currPage);
 }
     
-
 export default UserForm;
-
-
