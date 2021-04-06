@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import React, { useState} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import {incrementPage} from '../redux/action';
+import { incrementPage, reset } from '../redux/action';
 
 
 const useStyles = makeStyles(() => ({
@@ -16,9 +16,10 @@ const useStyles = makeStyles(() => ({
 
 function StartPage() {
   const classes = useStyles();
-  let dispatch = useDispatch();
+  const dispatch = useDispatch();
   
   function handleClick() {
+    dispatch(reset());
     dispatch(incrementPage());
   }
   

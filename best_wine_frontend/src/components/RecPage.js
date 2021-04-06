@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -11,7 +11,9 @@ import data from './info.json'
 import {incrementPage, decrementPage } from '../redux/action';
 
 function RecPage() {
-  let dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const formData = useSelector(state => state);
+  console.log(formData)
   
   function handleNext() {
     dispatch(incrementPage());

@@ -12,3 +12,41 @@ export function decrementPage() {
     payload : -1
   })
 }
+
+export function submitQues1(color, cost, rating) {
+  return ({
+    type : 'question1',
+    payload : {
+      color,
+      cost,
+      rating
+    }
+  })
+}
+
+export function submitQues2(ocassion, mealPref) {
+  return ({
+    type : 'question2',
+    payload : {
+      ocassion,
+      mealPref
+    }
+  })
+}
+
+export function submitQues3(dryVsSweet, tannicity) {
+  return ({
+    type : 'question3',
+    payload : {
+      dryVsSweet,
+      tannicity
+    }
+  })
+}
+
+export function reset() {
+  return ({
+    type : 'reset',
+    payload : {}
+  })
+}
