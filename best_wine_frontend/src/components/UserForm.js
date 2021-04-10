@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 import StartPage from './StartPage';
-import { Question1, Question2, Question3 } from './Questions/';
+import { Question1, Question2, Question3, Question4 } from './Questions/';
 import RecPage from './RecPage';
-import Submit from './Submit';
+import FinalPage from './FinalPage';
 import './index.css';
 
 
@@ -19,7 +19,11 @@ function renderSwitch(page) {
     case 3:
       return (<Question3 />);
     case 4:
+      return (<Question4 />);
+    case 5:
       return (<RecPage />);
+    case 6:
+      return (<FinalPage />);
   }
 } 
 

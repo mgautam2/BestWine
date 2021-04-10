@@ -7,6 +7,8 @@ const PrefDataInitState = {
   mealPref : '',
   dryVsSweet: "",
   tannicity : '',
+  age: 0,
+  freq: ''
 }
 
 export default function preferenceData (state = PrefDataInitState, action) {
@@ -18,6 +20,8 @@ export default function preferenceData (state = PrefDataInitState, action) {
     case 'question2':
       return { ...state, ...action.payload }
     case 'question3':
+      return { ...state, ...action.payload }
+    case 'question4':
       return { ...state, ...action.payload }
     case 'reset':
       return PrefDataInitState;

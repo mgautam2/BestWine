@@ -1,26 +1,33 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Input from '@material-ui/core/Input';
+import TextField from '@material-ui/core/TextField';
 
 import WineTiles from './WineTiles';
 import data from './info.json'
+import {incrementPage } from '../redux/action';
 
-import {incrementPage, decrementPage } from '../redux/action';
+const useStyles = makeStyles(() => ({
+  input: {
+    fontSize: '20px',
+    maxWidth: '100px'
+  },
+}));
+
 
 function RecPage() {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const formData = useSelector(state => state);
-  console.log(formData)
   
   function handleNext() {
     dispatch(incrementPage());
   }
-  function handleBack() {
-    dispatch(decrementPage());
-  }
+
   return (
     <div >
       <AppBar position="static" >
@@ -40,6 +47,45 @@ function RecPage() {
           <div className="wine-tile-gp">
             {createWineTiles(data)}
           </div>
+          <div className="wine-tile-gp">
+            <TextField 
+              className={classes.inout}
+              name='i1'
+              autoComplete='off'
+              variant="outlined" 
+              error={true}
+              InputProps={{
+                className: classes.input,
+              }}
+              />
+            <TextField 
+              name='i2'
+              autoComplete='off'
+              variant="outlined" 
+              error={true}
+              InputProps={{
+                className: classes.input,
+              }}
+            />
+            <TextField 
+              name='i3'
+              autoComplete='off'
+              variant="outlined" 
+              error={true}
+              InputProps={{
+                className: classes.input,
+              }}
+            />
+            <TextField 
+              name='i4'
+              autoComplete='off'
+              variant="outlined" 
+              error={true}
+              InputProps={{
+                className: classes.input,
+              }}
+            />
+          </div>
           <Typography variant="h4" gutterBottom>
             How likely are you to try these recommended wines? Rate from 1-4.
           </Typography>
@@ -49,9 +95,9 @@ function RecPage() {
           <Button
             color="primary"
             variant="contained"
-            onClick={handleBack}
+            onClick={handleNext}
           >
-            Back
+            Continue
           </Button>
       </div>
       </div>
@@ -59,8 +105,10 @@ function RecPage() {
    )
 }
 
+// have an error element in the bottom for error with ranking
+
+
 function createWineTiles(winesInfo) {
-  console.log(winesInfo)
   let tiles = winesInfo.map(wine => {
     return (<WineTiles info={wine}/>);
   })

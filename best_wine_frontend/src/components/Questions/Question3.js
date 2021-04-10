@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -13,7 +12,7 @@ import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import { incrementPage, decrementPage, submitQues3 } from '../../redux/action';
 
 function Question3() {
-  const formData = useSelector(state => state);
+ const formData = useSelector(state => state); 
   const [dryVsSweet, setDryVsSweet] = useState(formData.dryVsSweet);
   const [tannicity, setTannicity] = useState(formData.tannicity);
   const dispatch = useDispatch();
@@ -30,7 +29,6 @@ function Question3() {
   }
   
   function handleChange({target}) {
-    console.log(target.value)
     if (target.name === 'dryVsSweet') {
       setDryVsSweet(target.value)
     }

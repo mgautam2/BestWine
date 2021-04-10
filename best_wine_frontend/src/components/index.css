@@ -22,6 +22,10 @@
   align-items: space-around;
 }
 
+.wine-tile-gp .MuiTextField-root{
+  text-align: center;
+}
+
 .img-warpper{
   width: 90%;
   height: auto;
@@ -39,5 +43,10 @@
 }
 
 
+ /* FinalPage */
+
+.retake {
+  height: 100px;
+}
 
 

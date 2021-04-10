@@ -44,9 +44,21 @@ export function submitQues3(dryVsSweet, tannicity) {
   })
 }
 
+export function submitQues4(age, freq) {
+  return ({
+    type : 'question4',
+    payload : {
+      age,
+      freq
+    }
+  })
+}
+
 export function reset() {
   return ({
     type : 'reset',
     payload : {}
   })
 }
+
+

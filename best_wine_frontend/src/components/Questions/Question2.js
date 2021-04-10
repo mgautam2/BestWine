@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -10,25 +9,11 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import { incrementPage, decrementPage, submitQues2 } from '../../redux/action';
 
-const useStyles = makeStyles(() => ({
-  ratingRadioGp: {
-    display: 'flex',
-    flexDirection: 'row',
-    border: 'red 2px dotted',
-    justifyContent: 'center',
-    fontSize: '10px'
-  },
-  ratingBtn: {
-    
-  }
-}));
-
 function Question1() {
   const formData = useSelector(state => state);
   const [ocassion, setOcassion] = useState(formData.ocassion);
   const [mealPref, setMealPref] = useState(formData.mealPref);
   const dispatch = useDispatch();
-  const classes = useStyles();
   
   function handleNext() {
     dispatch(submitQues2(ocassion, mealPref));
