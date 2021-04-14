@@ -1,5 +1,6 @@
 import json
 import math
+import sys
 
 # TODO Take in json and url command line arguement. Select images for selected wines
 
@@ -114,8 +115,8 @@ def sortByScore(scoresDict):
             break
     return toReturn
 
-def getAIRecommendedWines():
-    with open("input.json") as f:
+def getAIRecommendedWines(filename, outputFile):
+    with open(filename) as f:
         data = json.load(f)
     outputs = []
     for userInput in data:
@@ -127,8 +128,13 @@ def getAIRecommendedWines():
         scoreWinesPerActivity(request, wineList, wineScoreList)
         scoreWinesPerABV(request, wineList, wineScoreList)
         outputs.append(sortByScore(wineScoreList))
-    return outputs
+    
+    f = open(outputFile, "w")
+    f.write(str(outputs))
+    f.close()
 
 def main():
-    print(getAIRecommendedWines())
+    filename = sys.argv[1]
+    outputFileName = sys.argv[2]
+    getAIRecommendedWines(filename, outputFileName)
 main()
