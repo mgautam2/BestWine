@@ -1,6 +1,8 @@
 import json
 import math
 
+# TODO Take in json and url command line arguement. Select images for selected wines
+
 activity_map = dict({'Party': ['Popping Bottles', 'Party Wine'],
                      'Gift': ['Winning Over the Boss', 'Host/Hostess Gifting'],
                      'To Get Drunk': ['Boozy Beach Trips', 'Starting The Night', 'Happy Hour'],
@@ -13,15 +15,13 @@ activity_map = dict({'Party': ['Popping Bottles', 'Party Wine'],
                      })
 
 class Request:
-    def __init__(self, fields):
-        self.sweetness = fields[0]
-        self.activites = fields[1][1:len(fields[1])-1].split(" ")
-        self.price = fields[2]
-        self.tannicity = fields[3]
-        self.acidity = fields[4]
-        self.meal = fields[5]
-        self.rating = fields[6]
-        self.type = fields[7]
+    def __init__(self, info):
+        self.sweetness = info['ABV']
+        self.activites = info['Activities']
+        self.price = info['Cost']
+        self.tannicity = info['Tannicity']
+        self.rating = info['Rating']
+        self.type = info['Color']
 
         if self.price == 'Under $10':
             self.price_check = lambda a : a < 10
@@ -92,17 +92,43 @@ def scoreWinesPerActivity(userRequest, wineData, scoresDict):
         for wine in wineData:
             for wineActivity in wine['activites']:
                 if wineActivity in activity_map.get(activity):
-                    scoresDict[wine['name']] = scoresDict[wine['name']] + 1
+                    scoresDict[wine['name']] = scoresDict[wine['name']] + 3
 
-def main():
-    f = open("example_user_input.txt", "r")
-    lines = f.readlines()
-    for requestLine in lines:
-        request = Request(requestLine.split(','))
+def scoreWinesPerABV(userRequest, wineData, scoresDict):
+    desiredSweetness = userRequest.sweetness
+    for wine in wineData:
+        if 'abv' in wine:
+            abvString = wine['abv'][0:2]
+            abv = int(abvString)
+            score = 5 - ((abv / 17) * 10 - desiredSweetness)
+            scoresDict[wine['name']] = scoresDict[wine['name']] + score
+
+def sortByScore(scoresDict):
+    sortedScores = sorted(scoresDict.items(), key=lambda x: x[1], reverse=True)
+    toReturn = []
+    counter = 0
+    for i in sortedScores:
+        toReturn.append([i[0], i[1]])
+        counter = counter + 1
+        if (counter >= 4):
+            break
+    return toReturn
+
+def getAIRecommendedWines():
+    with open("input.json") as f:
+        data = json.load(f)
+    outputs = []
+    for userInput in data:
+        request = Request(userInput)
         wineList = getWines(request.type)
         wineList = filterByCost(request.price_check, wineList)
         wineList = filterByRating(request.rating_check, wineList)
         wineScoreList = createWineDict(wineList)
         scoreWinesPerActivity(request, wineList, wineScoreList)
-        print(wineScoreList)
+        scoreWinesPerABV(request, wineList, wineScoreList)
+        outputs.append(sortByScore(wineScoreList))
+    return outputs
+
+def main():
+    print(getAIRecommendedWines())
 main()
