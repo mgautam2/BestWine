@@ -28,7 +28,7 @@ function renderSwitch(page) {
 } 
 
 function UserForm() {
-  let currPage = useSelector(state => state.currPage);
+  let currPage = useSelector(state => state.preferenceData.currPage);
   return renderSwitch(currPage);
 }
     

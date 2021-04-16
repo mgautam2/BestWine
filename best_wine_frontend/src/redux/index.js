@@ -1,8 +1,11 @@
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 
-import data from './model';
+import { preferenceData, userRating } from './model';
 
+const reducers = combineReducers({
+  preferenceData,
+  userRating
+})
 
-const store = createStore(data);
-// store.subscribe(() => console.log(store.getState()))
+const store = createStore(reducers);
 export default store

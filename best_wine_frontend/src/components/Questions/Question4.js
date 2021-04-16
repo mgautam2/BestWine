@@ -10,12 +10,12 @@ import Input from '@material-ui/core/Input';
 
 import { incrementPage, decrementPage, submitQues4 } from '../../redux/action';
 
-function Question4() {
- const formData = useSelector(state => state); 
-  const [age, setAge] = useState();
-  const [freq, setFreq] = useState(formData.freq);
-  const dispatch = useDispatch();
 
+function Question4() {
+ const formData = useSelector(state => state.preferenceData); 
+  const [age, setAge] = useState();
+  const [freq, setFreq] = useState(formData.Freq);
+  const dispatch = useDispatch();
   
   function handleNext() {
     dispatch(submitQues4(age, freq));

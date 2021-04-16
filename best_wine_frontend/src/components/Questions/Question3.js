@@ -11,12 +11,12 @@ import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 
 import { incrementPage, decrementPage, submitQues3 } from '../../redux/action';
 
-function Question3() {
- const formData = useSelector(state => state); 
-  const [dryVsSweet, setDryVsSweet] = useState(formData.dryVsSweet);
-  const [tannicity, setTannicity] = useState(formData.tannicity);
-  const dispatch = useDispatch();
 
+function Question3() {
+ const formData = useSelector(state => state.preferenceData); 
+  const [dryVsSweet, setDryVsSweet] = useState(formData.ABV);
+  const [tannicity, setTannicity] = useState(formData.Tannicity);
+  const dispatch = useDispatch();
   
   function handleNext() {
     dispatch(submitQues3(dryVsSweet, tannicity));
@@ -90,10 +90,10 @@ function Question3() {
             How tannic would you prefer your wine? “Tannic” refers to the amount of tannins in a wine which causes a drying sensation in your mouth.  
           </Typography>
           <RadioGroup name='tannicity' value={tannicity} onChange={handleChange}>
-            <FormControlLabel value='1' control={<Radio />} label='Low in Tannins' />
-            <FormControlLabel value='2' control={<Radio />} label='Medium in Tannins' />
-            <FormControlLabel value='3' control={<Radio />} label='High in Tannins' />
-            <FormControlLabel value='4' control={<Radio />} label='I Don’t Know/ No Preference' />
+            <FormControlLabel value='Low in Tannins' control={<Radio />} label='Low in Tannins' />
+            <FormControlLabel value='Medium in Tannins' control={<Radio />} label='Medium in Tannins' />
+            <FormControlLabel value='High in Tannins' control={<Radio />} label='High in Tannins' />
+            <FormControlLabel value='I Don’t Know/ No Preference' control={<Radio />} label='I Don’t Know/ No Preference' />
           </RadioGroup>
           <Button
             color='primary'

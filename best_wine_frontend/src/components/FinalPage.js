@@ -1,5 +1,6 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
@@ -7,10 +8,11 @@ import Button from '@material-ui/core/Button';
 import RefreshIcon from '@material-ui/icons/Refresh';
 
 import WineTiles from './WineTiles';
-import data from './info.json'
-
+import constants from '../constants';
 import { reset } from '../redux/action';
 
+
+const URL = `${constants.BASE_URL}/api/userRatings`;
 const useStyles = makeStyles({
   mainDiv: {
     display: 'flex',
@@ -22,13 +24,15 @@ const useStyles = makeStyles({
   }
 });
 
-
 function RecPage() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const recData = useSelector(state => state.userRating);
   
   function handleShare() {
-    // Send send results back to server
+    axios.post(URL, recData)
+    .then( data => console.log("Sucessful"))
+    .catch(err => console.log(err))
   }
   
   function handleRetake() {
@@ -62,7 +66,7 @@ function RecPage() {
             </div>
           </div>
           <div className="wine-tile-gp">
-            {createWineTiles(data)}
+            {createWineTiles(recData.wineData)}
           </div>
           <Button
             color="primary"
@@ -78,13 +82,10 @@ function RecPage() {
 }
 
 function createWineTiles(winesInfo) {
-  console.log(winesInfo)
   let tiles = winesInfo.map(wine => {
     return (<WineTiles info={wine}/>);
   })
   return tiles
 }
-
-
 
 export default RecPage;

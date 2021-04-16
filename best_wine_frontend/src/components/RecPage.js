@@ -1,120 +1,224 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import Input from '@material-ui/core/Input';
-import TextField from '@material-ui/core/TextField';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 import WineTiles from './WineTiles';
-import data from './info.json'
-import {incrementPage } from '../redux/action';
+import {incrementPage, nextRecc, setWineData, setRatingData } from '../redux/action';
+import constants from '../constants';
 
-const useStyles = makeStyles(() => ({
-  input: {
-    fontSize: '20px',
-    maxWidth: '100px'
-  },
-}));
 
+const URL = `${constants.BASE_URL}/api/recommendations`;
 
 function RecPage() {
-  const classes = useStyles();
   const dispatch = useDispatch();
-  const formData = useSelector(state => state);
+  const formData = useSelector(state => state.preferenceData);
+  const recData = useSelector(state => state.userRating);
+  const [gotData, setGotData] = useState(false);
+  const [ques1, setQues1] = useState("");
+  const [ques2, setQues2] = useState("");
+  // console.log(recData.wineData)
+  
+  useEffect(() => { // fetch data from server with reccomndations
+    console.log(formData)
+    axios.post(URL, formData)
+    .then(({data}) => {
+      dispatch(setWineData(data));
+      setGotData(true);
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }, [])
+  
+  function handleClick({target}) {
+    if (target.name === 'ques1') {
+      setQues1(target.value);
+    }
+    else if (target.name === 'ques2') {
+      setQues2(target.value);
+    }
+  }
   
   function handleNext() {
-    dispatch(incrementPage());
+    dispatch(setRatingData(recData.reccNum, {ques1, ques2}));
+    
+    if (recData.reccNum < 3) {
+        dispatch(nextRecc());
+    }
+    else {
+      dispatch(incrementPage());
+    }
+    setQues1("");
+    setQues2("");
+  }
+  
+  function createWineTiles(winesInfo) {
+    return <WineTiles info={winesInfo} num={recData.reccNum + 1}/>;
   }
 
-  return (
-    <div >
-      <AppBar position="static" >
-        <Typography variant="h6" color="inherit">
-          Wine Recommendation System
-        </Typography>
-      </AppBar>
-      <div className="formPage">
-        <div className="formDiv">
-          <Typography variant="h3" gutterBottom>
-            Our Recommendations for you 
+  if (gotData) { // conditional render based on data
+    return (
+      <div >
+        <AppBar position="static" >
+          <Typography variant="h6" color="inherit">
+            Wine Recommendation System
           </Typography>
-          <Typography variant="h5" gutterBottom>
-            Based on your responses, here are the best wines for the occasion! 
-            Some wines are recommended by our AI algorithm and others are recommendations from our in-house wine experts
-          </Typography>
-          <div className="wine-tile-gp">
-            {createWineTiles(data)}
-          </div>
-          <div className="wine-tile-gp">
-            <TextField 
-              className={classes.inout}
-              name='i1'
-              autoComplete='off'
-              variant="outlined" 
-              error={true}
-              InputProps={{
-                className: classes.input,
-              }}
+        </AppBar>
+        <div className="formPage">
+          <div className="formDiv">
+            <Typography variant="h3" gutterBottom>
+              We have four recommendations for you
+            </Typography>
+            <Typography variant="h5" gutterBottom>
+              {constants.welcomeText[recData.senarioType]} 
+            </Typography>
+            <div className="wine-tile-gp">
+              {createWineTiles(recData.wineData[recData.reccNum])}
+            </div>
+            
+            <Typography variant="h5" gutterBottom>
+              Do you trust this recommendation?
+            </Typography>
+            
+            <RadioGroup row name="ques1" onClick={handleClick} value={ques1}>
+              <FormControlLabel
+                control={<div></div>}
+                label="Strongly Distrust"
               />
-            <TextField 
-              name='i2'
-              autoComplete='off'
-              variant="outlined" 
-              error={true}
-              InputProps={{
-                className: classes.input,
-              }}
-            />
-            <TextField 
-              name='i3'
-              autoComplete='off'
-              variant="outlined" 
-              error={true}
-              InputProps={{
-                className: classes.input,
-              }}
-            />
-            <TextField 
-              name='i4'
-              autoComplete='off'
-              variant="outlined" 
-              error={true}
-              InputProps={{
-                className: classes.input,
-              }}
-            />
+              <FormControlLabel
+                value="1"
+                control={<Radio color="primary" />}
+                label="1"
+                labelPlacement="bottom"
+              />
+              <FormControlLabel
+                value="2"
+                control={<Radio color="primary" />}
+                label="2"
+                labelPlacement="bottom"
+              />
+              <FormControlLabel
+                value="3"
+                control={<Radio color="primary" />}
+                label="3"
+                labelPlacement="bottom"
+              />
+              <FormControlLabel
+                value="4"
+                control={<Radio color="primary" />}
+                label="4"
+                labelPlacement="bottom"
+              />
+              <FormControlLabel
+                value="5"
+                control={<Radio color="primary" />}
+                label="5"
+                labelPlacement="bottom"
+              />
+              <FormControlLabel
+                control={<div></div>}
+                label="Strongly Trust"
+              />
+            </RadioGroup>
+            <br />
+            <br />
+            <Typography variant="h5" gutterBottom>
+              How likely are you to purchase this wine?
+            </Typography>
+            <RadioGroup row name="ques2" onClick={handleClick} value={ques2}>
+              <FormControlLabel
+                control={<div></div>}
+                label="Very Unlikely"
+              />
+              <FormControlLabel
+                value="1"
+                control={<Radio color="primary" />}
+                label="1"
+                labelPlacement="bottom"
+              />
+              <FormControlLabel
+                value="2"
+                control={<Radio color="primary" />}
+                label="2"
+                labelPlacement="bottom"
+              />
+              <FormControlLabel
+                value="3"
+                control={<Radio color="primary" />}
+                label="3"
+                labelPlacement="bottom"
+              />
+              <FormControlLabel
+                value="4"
+                control={<Radio color="primary" />}
+                label="4"
+                labelPlacement="bottom"
+              />
+              <FormControlLabel
+                value="5"
+                control={<Radio color="primary" />}
+                label="5"
+                labelPlacement="bottom"
+              />
+              <FormControlLabel
+                value="6"
+                control={<Radio color="primary" />}
+                label="6"
+                labelPlacement="bottom"
+              />
+              <FormControlLabel
+                value="7"
+                control={<Radio color="primary" />}
+                label="7"
+                labelPlacement="bottom"
+              />
+              <FormControlLabel
+                value="8"
+                control={<Radio color="primary" />}
+                label="8"
+                labelPlacement="bottom"
+              />
+              <FormControlLabel
+                value="9"
+                control={<Radio color="primary" />}
+                label="9"
+                labelPlacement="bottom"
+              />
+              <FormControlLabel
+                value="10"
+                control={<Radio color="primary" />}
+                label="10"
+                labelPlacement="bottom"
+              />
+              <FormControlLabel
+                control={<div></div>}
+                label="Very Likely"
+              />
+            </RadioGroup>
+            
+            <Button
+              color="primary"
+              variant="contained"
+              onClick={handleNext}
+            >
+              Continue
+            </Button>
           </div>
-          <Typography variant="h4" gutterBottom>
-            How likely are you to try these recommended wines? Rate from 1-4.
-          </Typography>
-          <Typography variant="h5" gutterBottom>
-            1: Most likely, 4: Least likely
-          </Typography>
-          <Button
-            color="primary"
-            variant="contained"
-            onClick={handleNext}
-          >
-            Continue
-          </Button>
+        </div>
       </div>
-      </div>
-    </div>
-   )
+     )
+   }
+   else {
+     return (
+       <div> Bhag Bosdike</div>
+     );
+   }
 }
-
-// have an error element in the bottom for error with ranking
-
-
-function createWineTiles(winesInfo) {
-  let tiles = winesInfo.map(wine => {
-    return (<WineTiles info={wine}/>);
-  })
-  return tiles
-}
-
-
 
 export default RecPage;

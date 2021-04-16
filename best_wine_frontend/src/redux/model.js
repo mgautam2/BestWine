@@ -1,17 +1,17 @@
 const PrefDataInitState = {
   currPage : 0,
-  color : '',
-  cost : '',
-  rating : '',
-  ocassion : '',
-  mealPref : '',
-  dryVsSweet: "",
-  tannicity : '',
-  age: 0,
-  freq: ''
+  Color : '',
+  Cost : '',
+  Rating : '',
+  Activities : '',
+  MealPref : '',
+  ABV: "",
+  Tannicity : '',
+  Age: 0,
+  Freq: ''
 }
 
-export default function preferenceData (state = PrefDataInitState, action) {
+export function preferenceData (state = PrefDataInitState, action) {
   switch (action.type) {
     case 'changePage':
       return { ...state, currPage: state.currPage + action.payload }
@@ -29,3 +29,29 @@ export default function preferenceData (state = PrefDataInitState, action) {
       return state
     }
 }
+
+const userRatingInitState = {
+  reccNum : 0,
+  senarioType: 0,
+  wineData: [],
+  wineRatingData: ["", "", "", ""]
+}
+
+export function userRating (state = userRatingInitState, action) {
+  switch (action.type) {
+    case 'setSenario':
+      return { ...state, senarioType: action.payload }
+    case 'nextRecc':
+      return { ...state, reccNum: state.reccNum + 1}
+    case 'setWineData':
+      return { ...state, wineData: action.payload}
+    case 'setRatingData':
+      const {num, data} = action.payload;
+      state.wineRatingData[num] = data;
+      return { ...state, wineRatingData: state.wineRatingData}
+    default:
+      return state
+    }
+}
+
+

@@ -9,10 +9,10 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { incrementPage, decrementPage, submitQues1 } from '../../redux/action';
 
 function Question1() {
-  const formData = useSelector(state => state);
-  const [color, setColor] = useState(formData.color);
-  const [cost, setCost] = useState(formData.cost);
-  const [rating, setRating] = useState(formData.rating);
+  const formData = useSelector(state => state.preferenceData);
+  const [color, setColor] = useState(formData.Color);
+  const [cost, setCost] = useState(formData.Cost);
+  const [rating, setRating] = useState(formData.Rating);
   const dispatch = useDispatch();
     
   function handleNext() {
@@ -51,33 +51,32 @@ function Question1() {
             What type of wine are you looking for? Select One.
           </Typography>
           <RadioGroup name='color' value={color} onChange={handleChange}>
-            <FormControlLabel value='red' control={<Radio />} label='Red' />
-            <FormControlLabel value='white' control={<Radio />} label='White' />
-            <FormControlLabel value='rose' control={<Radio />} label='Rosé' />
-            <FormControlLabel value='na' control={<Radio />} label='I Don’t Know/No Preference' />
+            <FormControlLabel value='Red' control={<Radio />} label='Red' />
+            <FormControlLabel value='White' control={<Radio />} label='White' />
+            <FormControlLabel value='Rose' control={<Radio />} label='Rosé' />
+            <FormControlLabel value='No Pref' control={<Radio />} label='I Don’t Know/No Preference' />
           </RadioGroup>
           
           <Typography variant='h4' gutterBottom>
             How much are you willing to spend on wine today? Select One.
           </Typography>
           <RadioGroup name='cost' value={cost} onChange={handleChange}>
-            <FormControlLabel value='1' control={<Radio />} label='< $10' />
-            <FormControlLabel value='2' control={<Radio />} label='$10-15' />
-            <FormControlLabel value='3' control={<Radio />} label='$15-20' />
-            <FormControlLabel value='4' control={<Radio />} label='> $20' />
+            <FormControlLabel value='Under $10' control={<Radio />} label='< $10' />
+            <FormControlLabel value='$10-$15' control={<Radio />} label='$10-15' />
+            <FormControlLabel value='$15-$20' control={<Radio />} label='$15-20' />
+            <FormControlLabel value='Above $20' control={<Radio />} label='> $20' />
           </RadioGroup>
           
           <Typography variant='h4' gutterBottom>
             What quality of wine are you looking for?
           </Typography>
           <RadioGroup name='rating' value={rating} onChange={handleChange}>
-          <FormControlLabel value='1' control={<Radio />} label='Soundly made' />
-          <FormControlLabel value='2' control={<Radio />} label='Very good' />
-          <FormControlLabel value='3' control={<Radio />} label='Outstanding' />
-          <FormControlLabel value='4' control={<Radio />} label='Beyond Outstanding' />
-          <FormControlLabel value='5' control={<Radio />} label='I Don’t Know/No Preference' />
+          <FormControlLabel value='Soundly Made' control={<Radio />} label='Soundly made' />
+          <FormControlLabel value='Very Good' control={<Radio />} label='Very good' />
+          <FormControlLabel value='Outstanding' control={<Radio />} label='Outstanding' />
+          <FormControlLabel value='Beyond Outstanding' control={<Radio />} label='Beyond Outstanding' />
+          <FormControlLabel value='No Pref' control={<Radio />} label='I Don’t Know/No Preference' />
           </RadioGroup>
-          
           <Button
             color='primary'
             variant='contained'

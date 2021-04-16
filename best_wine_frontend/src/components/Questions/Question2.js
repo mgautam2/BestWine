@@ -10,9 +10,9 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { incrementPage, decrementPage, submitQues2 } from '../../redux/action';
 
 function Question1() {
-  const formData = useSelector(state => state);
-  const [ocassion, setOcassion] = useState(formData.ocassion);
-  const [mealPref, setMealPref] = useState(formData.mealPref);
+  const formData = useSelector(state => state.preferenceData);
+  const [ocassion, setOcassion] = useState(formData.Activities);
+  const [mealPref, setMealPref] = useState(formData.MealPref);
   const dispatch = useDispatch();
   
   function handleNext() {
@@ -48,25 +48,25 @@ function Question1() {
             What is the occasion you want this wine for? Check all that apply.
           </Typography>
           <RadioGroup name='ocassion' value={ocassion} onChange={handleChange}>
-            <FormControlLabel value='1' control={<Radio />} label='Party' />
-            <FormControlLabel value='2' control={<Radio />} label='Gift' />
-            <FormControlLabel value='3' control={<Radio />} label='Drink Throughout the Day' />
-            <FormControlLabel value='4' control={<Radio />} label='Enjoy By Yourself' />
-            <FormControlLabel value='5' control={<Radio />} label='Enjoy With Friends' />
-            <FormControlLabel value='6' control={<Radio />} label='Dinner Setting' />
-            <FormControlLabel value='7' control={<Radio />} label='Pair with a Meal' />
-            <FormControlLabel value='8' control={<Radio />} label='Specific Craving' />
-            <FormControlLabel value='9' control={<Radio />} label='I Don’t Know/ No Preference' />
+            <FormControlLabel value='Party' control={<Radio />} label='Party' />
+            <FormControlLabel value='Gift' control={<Radio />} label='Gift' />
+            <FormControlLabel value='Drink Throughout the Day' control={<Radio />} label='Drink Throughout the Day' />
+            <FormControlLabel value='Enjoy By Yourself' control={<Radio />} label='Enjoy By Yourself' />
+            <FormControlLabel value='Enjoy With Friends' control={<Radio />} label='Enjoy With Friends' />
+            <FormControlLabel value='Dinner Setting' control={<Radio />} label='Dinner Setting' />
+            <FormControlLabel value='Pair with a Meal' control={<Radio />} label='Pair with a Meal' />
+            <FormControlLabel value='Specific Craving' control={<Radio />} label='Specific Craving' />
+            <FormControlLabel value='No Pref' control={<Radio />} label='I Don’t Know/ No Preference' />
           </RadioGroup>          
           <Typography variant='h4' gutterBottom>
             If you were drinking wine with a meal, what types of food would you eat?
           </Typography>
           <RadioGroup name='mealPref' value={mealPref} onChange={handleChange}>
-            <FormControlLabel value='1' control={<Radio />} label='Steak, Lamb, Beef, Pork' />
-            <FormControlLabel value='2' control={<Radio />} label='Chicken, poultry' />
-            <FormControlLabel value='3' control={<Radio />} label='Seafood or Shellfish' />
-            <FormControlLabel value='4' control={<Radio />} label='Greasy' />
-            <FormControlLabel value='5' control={<Radio />} label='Other' />
+            <FormControlLabel value='Steak, Lamb, Beef, Pork' control={<Radio />} label='Steak, Lamb, Beef, Pork' />
+            <FormControlLabel value='Chicken, poultry' control={<Radio />} label='Chicken, poultry' />
+            <FormControlLabel value='Seafood or Shellfish' control={<Radio />} label='Seafood or Shellfish' />
+            <FormControlLabel value='Greasy' control={<Radio />} label='Greasy' />
+            <FormControlLabel value='Other' control={<Radio />} label='Other' />
           </RadioGroup>
           <Button
             color='primary'

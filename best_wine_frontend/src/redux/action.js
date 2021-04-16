@@ -1,3 +1,4 @@
+// preferenceData Action Creators
 
 export function incrementPage() {
   return ({
@@ -13,43 +14,43 @@ export function decrementPage() {
   })
 }
 
-export function submitQues1(color, cost, rating) {
+export function submitQues1(Color, Cost, Rating) {
   return ({
     type : 'question1',
     payload : {
-      color,
-      cost,
-      rating
+      Color,
+      Cost,
+      Rating
     }
   })
 }
 
-export function submitQues2(ocassion, mealPref) {
+export function submitQues2(Activities, MealPref) {
   return ({
     type : 'question2',
     payload : {
-      ocassion,
-      mealPref
+      Activities,
+      MealPref
     }
   })
 }
 
-export function submitQues3(dryVsSweet, tannicity) {
+export function submitQues3(ABV, Tannicity) {
   return ({
     type : 'question3',
     payload : {
-      dryVsSweet,
-      tannicity
+      ABV,
+      Tannicity
     }
   })
 }
 
-export function submitQues4(age, freq) {
+export function submitQues4(Age, Freq) {
   return ({
     type : 'question4',
     payload : {
-      age,
-      freq
+      Age,
+      Freq
     }
   })
 }
@@ -62,3 +63,40 @@ export function reset() {
 }
 
 
+// UserRating Action Creators
+
+export function setSenario(senario) {
+  return ({
+    type : 'setSenario',
+    payload : {
+      senario // watch this
+    }
+  })
+}
+
+export function nextRecc() {
+  return ({
+    type : 'nextRecc'
+  })
+}
+
+export function setWineData(data) {
+  return ({
+    type : 'setWineData',
+    payload: data
+  })
+}
+
+export function setRatingData( num, data) {
+  const {ques1: trust, ques2: purchaseProb} = data;
+  return ({
+    type: 'setRatingData',
+    payload: {
+      num,
+      data: {
+        trust,
+        purchaseProb
+      }
+    }
+  })
+}

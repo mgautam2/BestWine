@@ -15,14 +15,14 @@ const useStyles = makeStyles({
   }
 });
 
-function WineTiles({info}) {
+function WineTiles({info, num}) {
   const classes = useStyles();
 
   return (
     <Card className={classes.root}>
       <CardHeader
         className={classes.content}
-        title={info.from}
+        title={`Recommendation ${num} of 4`}
       />
       <div className='img-warpper'>
         <img src={info.imgUrl} alt=''/>
@@ -37,13 +37,3 @@ function WineTiles({info}) {
 }
 
 export default WineTiles;
-
-// Make this Input box in Rec Page rather than in the individual tiles
-
-// <div className='tile-checkbox'>
-//   <TextField
-//     className='tile-input'
-//     variant='outlined'
-//   />
-// </div>
-  
