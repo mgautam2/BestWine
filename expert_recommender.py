@@ -230,7 +230,7 @@ def calculateExpertRec(filename, outputFile):
         wineRecs.append([k,v])
 
     wineRecs = sorted(wineRecs, key=lambda x: x[1], reverse=True)
-    outputs = [wineRecs[0][0], wineRecs[1][0], wineRecs[2][0], wineRecs[3][0]]
+    outputs = [wineRecs[0], wineRecs[1], wineRecs[2], wineRecs[3]]
 
     f = open(outputFile, "w")
     f.write(str(outputs))
