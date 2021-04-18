@@ -64,15 +64,16 @@ def getWines(typePref):
         with open('rose_wine_data.txt') as f:
             data = json.load(f)
         for i in range(len(data)):
-            if name not in wines:
+            if data[i] not in wines:
                 wines.append(data[i])
     return wines
 
 def filterByCost(priceCheck, wineList):
     retList = []
     for wineData in wineList:
-        if priceCheck(float(wineData['price'])):
-            retList.append(wineData)
+        if 'price' in wineData:
+            if priceCheck(float(wineData['price'])):
+                retList.append(wineData)
     return retList
 
 def filterByRating(ratingCheck, wineList):

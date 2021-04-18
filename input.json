@@ -1,12 +1,12 @@
 [{
-    "Color":"Red",
+    "Color":"No Pref",
     "Cost":"$15-$20",
     "Activities":["Party", "Gift"],
     "Rating":"Beyond Outstanding",
     "ABV":10,
     "Tannicity":"Low"
 }, {
-    "Color":"White",
+    "Color":"Red",
     "Cost":"$15-$20",
     "Activities":["Party", "Gift"],
     "Rating":"Okay",
