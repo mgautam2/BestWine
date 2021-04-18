@@ -1,0 +1,17 @@
+[{
+    "Color":"Red",
+    "Cost":"$15-$20",
+    "Activities":["Party", "Gift"],
+    "Rating":"Beyond Outstanding",
+    "ABV":10,
+    "Tannicity":"Low",
+    "Meal": "Steak, lamb, beef, pork"
+}, {
+    "Color":"White",
+    "Cost":"$15-$20",
+    "Activities":["Party", "Gift"],
+    "Rating":"Okay",
+    "ABV":10,
+    "Tannicity":"Low",
+    "Meal": "Seafood or shellfish"
+}]

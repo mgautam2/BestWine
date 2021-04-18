@@ -1,12 +1,7 @@
 from collections import defaultdict
 import json
+import sys
 
-'''
-indices:
-    0: name
-    1: style (wine color)
-    2: price
-'''
 wineData = [
 ["Acrobat Pinot Gris 2018", "White", "15-20"],
 ["Ravines Dry Riesling Finger Lakes 2016", "White", "10-15"],
@@ -55,7 +50,6 @@ def q1(recommendations):
 
 # 2. What is the occasion you want this wine for? 
 def q2(recommendations, response):
-    response = response.replace('(','').replace(')','')
     purposes = response.split(' ')
     for p in purposes:
         # whites
@@ -164,7 +158,7 @@ def q5(recommendations, response):
         recommendations["Domaine Chantepierre Tavel Rose 2019"] += 3
         recommendations["19 Crimes Snoop Cali Rosé"] += 3
     
-    elif response == "Seafood or Shellfish":
+    elif response == "Seafood or shellfish":
         # drink white wines
         recommendations["Acrobat Pinot Gris 2018"] += 3
         recommendations["Ravines Dry Riesling Finger Lakes 2016"] += 3
@@ -219,25 +213,34 @@ def q7(recommendations, response):
 
 
 
-def calculateExpertRec():
-    f = open("example_user_input.txt", "r")
-    lines = f.readlines()
-
-    # turn sample input request into list
-    for requestLine in lines:
-        request = requestLine.split(',')
+def calculateExpertRec(filename, outputFile):
+    with open(filename) as f:
+        data = json.load(f)
 
     recommendations = defaultdict(int)
     q1(recommendations)
-    q2(recommendations, request[1])
-    q3(recommendations, request[2])
+    q2(recommendations, ' '.join(data[0]['Activities']))
+    q3(recommendations, data[0]['Cost'])
     q4(recommendations)
-    q5(recommendations, request[4])
-    q7(recommendations, request[6])
+    q5(recommendations, data[0]['Meal'])
+    q7(recommendations, data[0]['Color'])
 
     wineRecs = []
     for k, v in recommendations.items():
         wineRecs.append([k,v])
 
     wineRecs = sorted(wineRecs, key=lambda x: x[1], reverse=True)
-    print("expert wine recs:", [wineRecs[0][0], wineRecs[1][0]])
+    outputs = [wineRecs[0][0], wineRecs[1][0], wineRecs[2][0], wineRecs[3][0]]
+
+    f = open(outputFile, "w")
+    f.write(str(outputs))
+    f.close()
+
+def main():
+    filename = sys.argv[1]
+    outputFileName = sys.argv[2]
+    # getAIRecommendedWines(filename, outputFileName)
+    calculateExpertRec(filename, outputFileName)
+
+main()
+
