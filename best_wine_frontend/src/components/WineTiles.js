@@ -17,19 +17,19 @@ const useStyles = makeStyles({
 
 function WineTiles({info, num}) {
   const classes = useStyles();
-
   return (
     <Card className={classes.root}>
-      <CardHeader
-        className={classes.content}
-        title={`Recommendation ${num} of 4`}
-      />
+      { (num) ? (<CardHeader
+          className={classes.content}
+          title={`Recommendation ${num} of 4`}
+        />) : ""
+      }
       <div className='img-warpper'>
-        <img src={info.imgUrl} alt=''/>
+        <img src={info[1]} alt=''/>
       </div>
       <CardContent className={classes.content}>
         <Typography gutterBottom variant='h6'>
-          {info.name}
+          {info[0]}
         </Typography>
       </CardContent>
     </Card>

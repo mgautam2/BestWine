@@ -3,69 +3,61 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 
+
 const router = new express.Router();
-
-
 const wineData = require('./info.json');
 const { getSenario } = require('../utils');
-
 let count = 0;
 
 router.post("/recommendations", function(req, res, next) {
-    
-    const { 
-      Color,
-      Cost,
-      Activities,
-      Rating,
-      ABV,
-      Tannicity
-    } = req.body;
-    
-    const data = {
-      Color,
-      Cost,
-      Activities,
-      Rating,
-      ABV,
-      Tannicity
+  
+    const inputFilePath = path.join(__dirname, '../recommender/input.json');
+    const outputFilePath = path.join(__dirname, '../recommender/output.json');
+    const AIRecFilePath = path.join(__dirname, "../recommender/AiRecommender.py");
+    // const ExpertRecFilePath = path.join(__dirname, "p.py");
+    const { Color, Cost, Activities, Rating, ABV, Tannicity } = req.body;
+    const data = { Color, Cost, Activities, Rating, ABV, Tannicity };
+    const input = [data]
+
+    try {
+      fs.writeFileSync(inputFilePath , JSON.stringify(input));
+      console.log("Written to file");
+    } catch (err) {
+      console.log(err)
+      res.status(500).send("Could not extract data");
     }
-    
-  try {
-    fs.writeFileSync('./input.json', JSON.stringify(data));
-    console.log("Written to file");
-    //file written successfully
-  } catch (err) {
-    console.error(err)
-  }
-    
-    
-    console.log(data)
-    res.status(200).json(wineData);
-    
-    // create a file for input for recommender
-    
-    const filePath = path.join(__dirname, "p.py");
-    
-    // later on pass in the input and output file for recommender
-    const child = spawn('python3' , [filePath]); 
-    
+  
+    const child = spawn('python3' , [AIRecFilePath, inputFilePath, outputFilePath]); 
+   
     child.on('exit', async function (code, signal) {
-      // send back the results
-      
-      // Delete the input file for recommender
-      // Delete the output file for recommender
+      let recData;
+      try {
+        recData = fs.readFileSync(outputFilePath);
+        recData = JSON.parse(recData)
+        fs.unlinkSync(inputFilePath);
+        fs.unlinkSync(outputFilePath);
+      } catch (err) {
+        console.log(err)
+        res.status(500).send(err);
+        return;
+      }
+      res.send({data:recData, reccNum: count});
+      count++;
     });
-    
+   
     child.stdout.on('data', (data) => {
       console.error(`${data}`);
     });
-    
+   
+    child.stderr.on('data', (data) => {
+      console.error(`${data}`);
+    });
+   
     child.on('error', (error) => {
      console.error(`error: ${error.message}`);
-     // send back 400 status code
+     res.status(500).send("Error while running the recommender");
    });
-   
+  
 });
 
 

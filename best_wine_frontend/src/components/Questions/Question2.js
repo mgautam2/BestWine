@@ -16,7 +16,7 @@ function Question1() {
   const dispatch = useDispatch();
   
   function handleNext() {
-    dispatch(submitQues2(ocassion, mealPref));
+    dispatch(submitQues2([ocassion], mealPref));
     dispatch(incrementPage());
   }
   

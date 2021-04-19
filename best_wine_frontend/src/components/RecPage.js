@@ -9,7 +9,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 import WineTiles from './WineTiles';
-import {incrementPage, nextRecc, setWineData, setRatingData } from '../redux/action';
+import {incrementPage, nextRecc, setWineData, setRatingData, setSenario } from '../redux/action';
 import constants from '../constants';
 
 
@@ -22,13 +22,13 @@ function RecPage() {
   const [gotData, setGotData] = useState(false);
   const [ques1, setQues1] = useState("");
   const [ques2, setQues2] = useState("");
-  // console.log(recData.wineData)
   
   useEffect(() => { // fetch data from server with reccomndations
-    console.log(formData)
     axios.post(URL, formData)
     .then(({data}) => {
-      dispatch(setWineData(data));
+      console.log(data.reccNum)
+      dispatch(setSenario(data.reccNum));
+      dispatch(setWineData(data.data[0]));
       setGotData(true);
     })
     .catch(err => {
@@ -60,7 +60,7 @@ function RecPage() {
   
   function createWineTiles(winesInfo) {
     return <WineTiles info={winesInfo} num={recData.reccNum + 1}/>;
-  }
+  } 
 
   if (gotData) { // conditional render based on data
     return (

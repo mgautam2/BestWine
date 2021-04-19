@@ -5,6 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { incrementPage, reset } from '../redux/action';
+import constants from '../constants';
 
 
 const useStyles = makeStyles(() => ({
@@ -41,9 +42,9 @@ function StartPage() {
           >
             Start Quiz
           </Button>
-          <Typography variant='h4' gutterBottom>
-            Image
-          </Typography>
+          <div className='img-warpper'>
+            <img src={constants.imgScr} alt=''/>
+          </div>
       </div>
       </div>
     </div>

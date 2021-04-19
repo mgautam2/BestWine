@@ -68,9 +68,7 @@ export function reset() {
 export function setSenario(senario) {
   return ({
     type : 'setSenario',
-    payload : {
-      senario // watch this
-    }
+    payload : senario // watch this
   })
 }
 
