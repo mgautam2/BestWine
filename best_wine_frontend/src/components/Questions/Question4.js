@@ -38,14 +38,24 @@ function Question4() {
   
   return (
     <div>
-      <AppBar position='static'>
-        <Typography variant='h4' color='inherit'>
-          Wine Recommendation System
+      <AppBar position='static' style={{background: '#f8f1ed'}} >
+        <Typography variant='h5'
+          style={{
+            margin: '5px',
+            marginLeft: '10px',
+            justifyContent: 'center',
+            alignItems: 'center',
+            color: '#000000'
+          }}
+        >
+          BestWine
         </Typography>
       </AppBar>
+
+      <div style={{background: '#f8f1ed', height: 'calc(100vh - 42px)'}}>
       <div className='formPage'>
         <div className='formDiv'>
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h6' gutterBottom>
             What is your age?
           </Typography>
           <Input
@@ -54,32 +64,43 @@ function Question4() {
             autoComplete='off'
             onChange={handleChange}
             placeholder="Enter you age" 
+            style={{marginLeft: '5%', marginBottom: '25px'}}
           />
           
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h6' gutterBottom>
             How often do you drink wine?
           </Typography>
-          <RadioGroup name='freq' value={freq} onChange={handleChange}>
-            <FormControlLabel value='1' control={<Radio />} label='Not at all Often' />
-            <FormControlLabel value='2' control={<Radio />} label='Somewhat Often' />
-            <FormControlLabel value='3' control={<Radio />} label='Very Often' />
-          </RadioGroup>
-          <Button
-            color='primary'
-            variant='contained'
-            onClick={handleBack}
-          >
-            Back
-          </Button>
-          <Button
-            color='primary'
-            variant='contained'
-            onClick={handleNext}
-          >
-            Submit
-          </Button>
+          <div style={{marginLeft: '5%', marginBottom: '5px'}}>
+            <RadioGroup name='freq' value={freq} onChange={handleChange}>
+              <FormControlLabel value='1' control={<Radio />} label='Not at all Often' />
+              <FormControlLabel value='2' control={<Radio />} label='Somewhat Often' />
+              <FormControlLabel value='3' control={<Radio />} label='Very Often' />
+            </RadioGroup>
+          </div>
+          
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            }}>
+            <Button
+              style={{background: '#bed596', color: '#000000', margin: '5px', paddingLeft: '35px', paddingRight: '35px'}}
+              variant='contained'
+              onClick={handleBack}
+            >
+              Back
+            </Button>
+            <Button
+              style={{background: '#bed596', color: '#000000', margin: '5px',  paddingLeft: '35px', paddingRight: '35px'}}
+              variant='contained'
+              onClick={handleNext}
+            >
+              Submit
+            </Button>
+          </div>
         </div>
       </div>
+    </div>
     </div>
    )
 }

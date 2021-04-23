@@ -39,62 +39,87 @@ function Question1() {
 
   return (
     <div >
-      <AppBar position='static' >
-        <Typography variant='h4' color='inherit'>
-          Wine Recommendation System
+      <AppBar position='static' style={{background: '#f8f1ed'}} >
+        <Typography variant='h5'
+          style={{
+            margin: '5px',
+            marginLeft: '10px',
+            justifyContent: 'center',
+            alignItems: 'center',
+            color: '#000000'
+          }}
+        >
+          BestWine
         </Typography>
       </AppBar>
+      <div style={{background: '#f8f1ed', height: 'calc(100vh - 42px)'}}>
       <div className='formPage'>
         
         <div className='formDiv'>
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h6' gutterBottom>
             What type of wine are you looking for? Select One.
           </Typography>
-          <RadioGroup name='color' value={color} onChange={handleChange}>
-            <FormControlLabel value='Red' control={<Radio />} label='Red' />
-            <FormControlLabel value='White' control={<Radio />} label='White' />
-            <FormControlLabel value='Rose' control={<Radio />} label='Rosé' />
-            <FormControlLabel value='No Pref' control={<Radio />} label='I Don’t Know/No Preference' />
-          </RadioGroup>
+          <div style={{marginLeft: '5%', marginBottom: '5px'}}>
+            <RadioGroup name='color' value={color} onChange={handleChange}>
+              <FormControlLabel value='Red' control={<Radio size='small' color='default' />} label='Red'/>
+              <FormControlLabel value='White' control={<Radio size='small' color='default'/>} label='White' />
+              <FormControlLabel value='Rose' control={<Radio size='small' color='default'/>} label='Rosé' />
+              <FormControlLabel value='No Pref' control={<Radio size='small' color='default'/>} label='I Don’t Know/No Preference' />
+            </RadioGroup>
+          </div>
           
-          <Typography variant='h4' gutterBottom>
+          
+          <Typography variant='h6' gutterBottom>
             How much are you willing to spend on wine today? Select One.
           </Typography>
-          <RadioGroup name='cost' value={cost} onChange={handleChange}>
-            <FormControlLabel value='Under $10' control={<Radio />} label='< $10' />
-            <FormControlLabel value='$10-$15' control={<Radio />} label='$10-15' />
-            <FormControlLabel value='$15-$20' control={<Radio />} label='$15-20' />
-            <FormControlLabel value='Above $20' control={<Radio />} label='> $20' />
-          </RadioGroup>
-          
-          <Typography variant='h4' gutterBottom>
+          <div style={{marginLeft: '5%', marginBottom: '5px'}}>
+            <RadioGroup name='cost' value={cost} onChange={handleChange}>
+              <FormControlLabel value='Under $10' control={<Radio size='small' color='default'/>} label='< $10'/>
+              <FormControlLabel value='$10-$15' control={<Radio size='small' color='default'/>} label='$10-15' />
+              <FormControlLabel value='$15-$20' control={<Radio size='small' color='default'/>} label='$15-20' />
+              <FormControlLabel value='Above $20' control={<Radio size='small' color='default'/>} label='> $20' />
+            </RadioGroup>
+          </div>
+
+          <Typography variant='h6' gutterBottom>
             What quality of wine are you looking for?
           </Typography>
-          <RadioGroup name='rating' value={rating} onChange={handleChange}>
-          <FormControlLabel value='Soundly Made' control={<Radio />} label='Soundly made' />
-          <FormControlLabel value='Very Good' control={<Radio />} label='Very good' />
-          <FormControlLabel value='Outstanding' control={<Radio />} label='Outstanding' />
-          <FormControlLabel value='Beyond Outstanding' control={<Radio />} label='Beyond Outstanding' />
-          <FormControlLabel value='No Pref' control={<Radio />} label='I Don’t Know/No Preference' />
-          </RadioGroup>
-          <Button
-            color='primary'
-            variant='contained'
-            onClick={handleBack}
-          >
-            Back
-          </Button>
-          <Button
-            color='primary'
-            variant='contained'
-            onClick={handleNext}
-          >
-            Next
-          </Button>
+          <div style={{marginLeft: '5%', marginBottom: '5px'}}>
+            <RadioGroup name='rating' value={rating} onChange={handleChange}>
+            <FormControlLabel value='Soundly Made' control={<Radio size='small' color='default'/>} label='Soundly made' />
+            <FormControlLabel value='Very Good' control={<Radio size='small' color='default'/>} label='Very good' />
+            <FormControlLabel value='Outstanding' control={<Radio size='small' color='default'/>} label='Outstanding' />
+            <FormControlLabel value='Beyond Outstanding' control={<Radio size='small' color='default'/>} label='Beyond Outstanding' />
+            <FormControlLabel value='No Pref' control={<Radio size='small' color='default'/>} label='I Don’t Know/No Preference' />
+            </RadioGroup>
+          </div>
+
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            }}>
+            <Button
+              style={{background: '#bed596', color: '#000000', margin: '5px', paddingLeft: '35px', paddingRight: '35px'}}
+              variant='contained'
+              onClick={handleBack}
+            >
+              Back
+            </Button>
+            <Button
+              style={{background: '#bed596', color: '#000000', margin: '5px',  paddingLeft: '35px', paddingRight: '35px'}}
+              variant='contained'
+              onClick={handleNext}
+            >
+              Next
+            </Button>
+          </div>
         </div>
       </div>
+    </div>
     </div>
    )
 }
 
 export default Question1;
+//dcb39a
