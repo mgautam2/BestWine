@@ -65,11 +65,20 @@ function RecPage() {
   if (gotData) { // conditional render based on data
     return (
       <div >
-        <AppBar position="static" >
-          <Typography variant="h6" color="inherit">
-            Wine Recommendation System
-          </Typography>
-        </AppBar>
+        <AppBar position='static' style={{background: '#f8f1ed'}} >
+        <Typography variant='h5'
+          style={{
+            margin: '5px',
+            marginLeft: '10px',
+            justifyContent: 'center',
+            alignItems: 'center',
+            color: '#000000'
+          }}
+        >
+          BestWine
+        </Typography>
+      </AppBar>
+
         <div className="formPage">
           <div className="formDiv">
             <Typography variant="h3" gutterBottom>
@@ -82,7 +91,7 @@ function RecPage() {
               {createWineTiles(recData.wineData[recData.reccNum])}
             </div>
             
-            <Typography variant="h5" gutterBottom>
+            <Typography variant="h6" gutterBottom>
               Do you trust this recommendation?
             </Typography>
             
@@ -128,7 +137,7 @@ function RecPage() {
             </RadioGroup>
             <br />
             <br />
-            <Typography variant="h5" gutterBottom>
+            <Typography variant="h6" gutterBottom>
               How likely are you to purchase this wine?
             </Typography>
             <RadioGroup row name="ques2" onClick={handleClick} value={ques2}>
@@ -203,7 +212,7 @@ function RecPage() {
             </RadioGroup>
             
             <Button
-              color="primary"
+              style={{background: '#bed596', color: '#000000', margin: '5px',  paddingLeft: '35px', paddingRight: '35px'}}
               variant="contained"
               onClick={handleNext}
             >
