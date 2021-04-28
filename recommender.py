@@ -105,16 +105,23 @@ def scoreWinesPerABV(userRequest, wineData, scoresDict):
             score = 5 - ((abv / 17) * 10 - desiredSweetness)
             scoresDict[wine['name']] = scoresDict[wine['name']] + score
 
-def sortByScore(scoresDict):
+def sortByScore(scoresDict, imageDict):
     sortedScores = sorted(scoresDict.items(), key=lambda x: x[1], reverse=True)
     toReturn = []
     counter = 0
     for i in sortedScores:
-        toReturn.append([i[0], i[1]])
+        image = imageDict[i[0]]
+        toReturn.append([i[0], image, i[1]])
         counter = counter + 1
         if (counter >= 4):
             break
     return toReturn
+
+def createImageDict(wineList):
+    retDict = {}
+    for data in wineList:
+        retDict[data['name']] = data['image']
+    return retDict
 
 def getAIRecommendedWines(filename, outputFile):
     with open(filename) as f:
@@ -126,9 +133,10 @@ def getAIRecommendedWines(filename, outputFile):
         wineList = filterByCost(request.price_check, wineList)
         wineList = filterByRating(request.rating_check, wineList)
         wineScoreList = createWineDict(wineList)
+        imageDict = createImageDict(wineList)
         scoreWinesPerActivity(request, wineList, wineScoreList)
         scoreWinesPerABV(request, wineList, wineScoreList)
-        outputs.append(sortByScore(wineScoreList))
+        outputs.append(sortByScore(wineScoreList, imageDict))
     
     f = open(outputFile, "w")
     f.write(str(outputs))
