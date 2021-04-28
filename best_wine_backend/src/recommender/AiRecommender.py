@@ -1,7 +1,6 @@
 import json
 import math
 import sys
-import os
 
 # TODO Take in json and url command line arguement. Select images for selected wines
 
@@ -47,23 +46,22 @@ class Request:
 
 def getWines(typePref):
     wines = []
-    dir = os.path.dirname(__file__);
     if typePref == 'White' or typePref == 'No Pref':
-        with open(dir + '/white_wine_data.txt') as f:
+        with open('white_wine_data.txt') as f:
             data = json.load(f)
         for i in range(len(data)):
             if data[i] not in wines:
                 wines.append(data[i])
 
     if typePref == 'Red' or typePref == 'No Pref':
-        with open(dir + '/red_wine_data.txt') as f:
+        with open('red_wine_data.txt') as f:
             data = json.load(f)
         for i in range(len(data)):
             if data[i] not in wines:
                 wines.append(data[i])
 
     if typePref == 'Rose' or typePref == 'No Pref':
-        with open(dir + '/rose_wine_data.txt') as f:
+        with open('rose_wine_data.txt') as f:
             data = json.load(f)
         for i in range(len(data)):
             if data[i] not in wines:
@@ -92,40 +90,38 @@ def createWineDict(wineData):
     return retDict
 
 def scoreWinesPerActivity(userRequest, wineData, scoresDict):
-    for wine in wineData:
-        for wineActivity in wine['activites']:
-            if (wineActivity == userRequest.activites):
-                scoresDict[wine['name']] = scoresDict[wine['name']] + 3
+    for activity in userRequest.activites:
+        for wine in wineData:
+            for wineActivity in wine['activites']:
+                if wineActivity in activity_map.get(activity):
+                    scoresDict[wine['name']] = scoresDict[wine['name']] + 3
 
 def scoreWinesPerABV(userRequest, wineData, scoresDict):
-    desiredSweetness = int(userRequest.sweetness)
+    desiredSweetness = userRequest.sweetness
     for wine in wineData:
         if 'abv' in wine:
             abvString = wine['abv'][0:2]
             abv = int(abvString)
             score = 5 - ((abv / 17) * 10 - desiredSweetness)
             scoresDict[wine['name']] = scoresDict[wine['name']] + score
-        
 
-def sortByScore(scoresDict, wineList, imageDict):
+def sortByScore(scoresDict, imageDict):
     sortedScores = sorted(scoresDict.items(), key=lambda x: x[1], reverse=True)
     toReturn = []
     counter = 0
     for i in sortedScores:
-        t = imageDict[i[0]]
-        toReturn.append([i[0], t, i[1]])
+        image = imageDict[i[0]]
+        toReturn.append([i[0], image, i[1]])
         counter = counter + 1
         if (counter >= 4):
             break
     return toReturn
 
-def getImageDict(list):
+def createImageDict(wineList):
     retDict = {}
-    for data in list:
+    for data in wineList:
         retDict[data['name']] = data['image']
     return retDict
-    
-
 
 def getAIRecommendedWines(filename, outputFile):
     with open(filename) as f:
@@ -136,14 +132,14 @@ def getAIRecommendedWines(filename, outputFile):
         wineList = getWines(request.type)
         wineList = filterByCost(request.price_check, wineList)
         wineList = filterByRating(request.rating_check, wineList)
-        imageDict = getImageDict(wineList)
         wineScoreList = createWineDict(wineList)
+        imageDict = createImageDict(wineList)
         scoreWinesPerActivity(request, wineList, wineScoreList)
         scoreWinesPerABV(request, wineList, wineScoreList)
-        outputs.append(sortByScore(wineScoreList, wineList, imageDict))
-        
+        outputs.append(sortByScore(wineScoreList, imageDict))
+    
     f = open(outputFile, "w")
-    f.write(json.dumps(outputs))
+    f.write(str(outputs))
     f.close()
 
 def main():
