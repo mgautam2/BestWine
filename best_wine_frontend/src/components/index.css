@@ -1,0 +1,52 @@
+.formPage {
+  display: flex;
+  flex-direction : column;
+  align-items: center;
+  justify-content: center;
+  width : 65%;
+  /* height: 90vh; */
+  margin: auto;
+}
+
+.formDiv {
+  width: 85%;
+  height: 80%;
+  /*  Align Item properly */
+  /* border : 4px black solid; */
+  padding: 30px;
+}
+
+.wine-tile-gp {
+  display: flex;
+  justify-content: space-around;
+  align-items: space-around;
+}
+
+.wine-tile-gp .MuiTextField-root{
+  text-align: center;
+}
+
+.img-warpper{
+  width: 90%;
+  height: auto;
+  margin: auto;
+}
+
+.img-warpper img{
+  width: 100%;
+  height: 100%;
+}
+
+.tile-input {
+  padding-bottom: 5px;
+  font-size: 11;
+}
+
+
+ /* FinalPage */
+
+.retake {
+  height: 100px;
+}
+
+
