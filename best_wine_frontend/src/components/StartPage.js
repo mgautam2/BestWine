@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import { incrementPage, reset } from '../redux/action';
 import constants from '../constants';
 import wine from '../drinks.png'
+import logo from '../bestwine_logo.png'
 
 
 function StartPage() {
@@ -21,17 +22,7 @@ function StartPage() {
   return (
     <div >
       <AppBar position='static' style={{background: '#f8f1ed'}} >
-        <Typography variant='h5'
-          style={{
-            margin: '5px',
-            marginLeft: '10px',
-            justifyContent: 'center',
-            alignItems: 'center',
-            color: '#000000'
-          }}
-        >
-          BestWine
-        </Typography>
+        <img src={logo} style={{justifyContent: 'center', maxWidth: '150px', padding: '0px'}}/>
       </AppBar>
       <div style={{background: '#f8f1ed', height: 'calc(100vh - 42px)'}}>
       <div className='formPage'>

@@ -8,7 +8,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-
+import logo from '../../bestwine_logo.png'
 import { incrementPage, decrementPage, submitQues3 } from '../../redux/action';
 
 
@@ -40,17 +40,7 @@ function Question3() {
   return (
     <div>
       <AppBar position='static' style={{background: '#f8f1ed'}} >
-        <Typography variant='h5'
-          style={{
-            margin: '5px',
-            marginLeft: '10px',
-            justifyContent: 'center',
-            alignItems: 'center',
-            color: '#000000'
-          }}
-        >
-          BestWine
-        </Typography>
+        <img src={logo} style={{justifyContent: 'center', maxWidth: '150px'}}/>
       </AppBar>
 
       <div style={{background: '#f8f1ed', height: 'calc(100vh - 42px)'}}>
@@ -104,10 +94,10 @@ function Question3() {
           </Typography>
           <div style={{marginLeft: '5%', marginBottom: '5px'}}>
             <RadioGroup name='tannicity' value={tannicity} onChange={handleChange}>
-              <FormControlLabel value='Low in Tannins' control={<Radio />} label='Low in Tannins' />
-              <FormControlLabel value='Medium in Tannins' control={<Radio />} label='Medium in Tannins' />
-              <FormControlLabel value='High in Tannins' control={<Radio />} label='High in Tannins' />
-              <FormControlLabel value='I Don’t Know/ No Preference' control={<Radio />} label='I Don’t Know/ No Preference' />
+              <FormControlLabel value='Low in Tannins' control={<Radio size='small' color='default' />} label='Low in Tannins' />
+              <FormControlLabel value='Medium in Tannins' control={<Radio size='small' color='default' />} label='Medium in Tannins' />
+              <FormControlLabel value='High in Tannins' control={<Radio size='small' color='default' />} label='High in Tannins' />
+              <FormControlLabel value='I Don’t Know/ No Preference' control={<Radio size='small' color='default' />} label='I Don’t Know/ No Preference' />
             </RadioGroup>
           </div>
           

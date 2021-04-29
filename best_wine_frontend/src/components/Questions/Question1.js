@@ -7,6 +7,7 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { incrementPage, decrementPage, submitQues1 } from '../../redux/action';
+import logo from '../../bestwine_logo.png'
 
 function Question1() {
   const formData = useSelector(state => state.preferenceData);
@@ -40,17 +41,7 @@ function Question1() {
   return (
     <div >
       <AppBar position='static' style={{background: '#f8f1ed'}} >
-        <Typography variant='h5'
-          style={{
-            margin: '5px',
-            marginLeft: '10px',
-            justifyContent: 'center',
-            alignItems: 'center',
-            color: '#000000'
-          }}
-        >
-          BestWine
-        </Typography>
+        <img src={logo} style={{justifyContent: 'center', maxWidth: '150px'}}/>
       </AppBar>
       <div style={{background: '#f8f1ed', height: 'calc(100vh - 42px)'}}>
       <div className='formPage'>
