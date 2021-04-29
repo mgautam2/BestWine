@@ -101,7 +101,7 @@ def scoreWinesPerABV(userRequest, wineData, scoresDict):
     for wine in wineData:
         if 'abv' in wine:
             abvString = wine['abv'][0:2]
-            abv = int(abvString)
+            abv = int(abvString.replace("%", ""))
             score = 5 - ((abv / 17) * 10 - desiredSweetness)
             scoresDict[wine['name']] = scoresDict[wine['name']] + score
 

@@ -1,15 +1,8 @@
 [{
-    "Color":"No Pref",
-    "Cost":"$15-$20",
-    "Activities":["Party", "Gift"],
-    "Rating":"Beyond Outstanding",
-    "ABV":10,
-    "Tannicity":"Low"
-}, {
     "Color":"Red",
-    "Cost":"$15-$20",
+    "Cost":"$10-$15",
     "Activities":["Party", "Gift"],
-    "Rating":"Okay",
-    "ABV":10,
-    "Tannicity":"Low"
+    "Rating":"Very Good",
+    "ABV":8,
+    "Tannicity":"Medium"
 }]
