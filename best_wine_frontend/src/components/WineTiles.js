@@ -7,11 +7,12 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: '300px',
+    maxWidth: '200px',
     textAlign: 'center'
   },
   content: {
-    padding: '10px'
+    padding: '10px',
+    fontSize:'10px'
   }
 });
 
@@ -21,14 +22,14 @@ function WineTiles({info, num}) {
     <Card className={classes.root}>
       { (num) ? (<CardHeader
           className={classes.content}
-          title={`Recommendation ${num} of 4`}
+          subheader={`${num} of 4`}
         />) : ""
       }
       <div className='img-warpper'>
-        <img src={info[1]} alt=''/>
+        <img src={info[1]} alt='' style={{paddingTop: '10px'}}/>
       </div>
-      <CardContent className={classes.content}>
-        <Typography gutterBottom variant='h6'>
+      <CardContent>
+        <Typography gutterBottom variant='h6' style={{fontSize: '15px',  marginBottom: '0px', paddingBottom: '0px'}}>
           {info[0]}
         </Typography>
       </CardContent>

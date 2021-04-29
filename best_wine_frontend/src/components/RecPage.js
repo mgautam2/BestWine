@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-
+import logo from '../bestwine_logo.png'
 import WineTiles from './WineTiles';
 import {incrementPage, nextRecc, setWineData, setRatingData, setSenario } from '../redux/action';
 import constants from '../constants';
@@ -66,31 +66,22 @@ function RecPage() {
     return (
       <div >
         <AppBar position='static' style={{background: '#f8f1ed'}} >
-        <Typography variant='h5'
-          style={{
-            margin: '5px',
-            marginLeft: '10px',
-            justifyContent: 'center',
-            alignItems: 'center',
-            color: '#000000'
-          }}
-        >
-          BestWine
-        </Typography>
-      </AppBar>
+          <img src={logo} style={{justifyContent: 'center', maxWidth: '150px'}}/> 
+        </AppBar>
 
-        <div className="formPage">
-          <div className="formDiv">
-            <Typography variant="h3" gutterBottom>
+        <div style={{background: '#f8f1ed', alignItems: 'center', justifyContent: 'center', display: 'flex', flexDirection: 'column'}}>
+          <div className="formDiv" style={{alignItems: 'center', justifyContent: 'center', display: 'flex', flexDirection: 'column'}}>
+            <Typography variant="h5" gutterBottom>
               We have four recommendations for you
             </Typography>
-            <Typography variant="h5" gutterBottom>
+            <Typography variant="h7" gutterBottom>
               {constants.welcomeText[recData.senarioType]} 
             </Typography>
             <div className="wine-tile-gp">
               {createWineTiles(recData.wineData[recData.reccNum])}
             </div>
             
+            <br/><br/>
             <Typography variant="h6" gutterBottom>
               Do you trust this recommendation?
             </Typography>
@@ -102,37 +93,38 @@ function RecPage() {
               />
               <FormControlLabel
                 value="1"
-                control={<Radio color="primary" />}
+                control={<Radio size='small' color='default' />}
                 label="1"
                 labelPlacement="bottom"
               />
               <FormControlLabel
                 value="2"
-                control={<Radio color="primary" />}
+                control={<Radio size='small' color='default' />}
                 label="2"
                 labelPlacement="bottom"
               />
               <FormControlLabel
                 value="3"
-                control={<Radio color="primary" />}
+                control={<Radio size='small' color='default' />}
                 label="3"
                 labelPlacement="bottom"
               />
               <FormControlLabel
                 value="4"
-                control={<Radio color="primary" />}
+                control={<Radio size='small' color='default' />}
                 label="4"
                 labelPlacement="bottom"
               />
               <FormControlLabel
                 value="5"
-                control={<Radio color="primary" />}
+                control={<Radio size='small' color='default' />}
                 label="5"
                 labelPlacement="bottom"
               />
               <FormControlLabel
                 control={<div></div>}
                 label="Strongly Trust"
+                style={{marginLeft: '10px'}}
               />
             </RadioGroup>
             <br />
@@ -147,70 +139,72 @@ function RecPage() {
               />
               <FormControlLabel
                 value="1"
-                control={<Radio color="primary" />}
+                control={<Radio size='small' color='default' />}
                 label="1"
                 labelPlacement="bottom"
               />
               <FormControlLabel
                 value="2"
-                control={<Radio color="primary" />}
+                control={<Radio size='small' color='default' />}
                 label="2"
                 labelPlacement="bottom"
               />
               <FormControlLabel
                 value="3"
-                control={<Radio color="primary" />}
+                control={<Radio size='small' color='default' />}
                 label="3"
                 labelPlacement="bottom"
               />
               <FormControlLabel
                 value="4"
-                control={<Radio color="primary" />}
+                control={<Radio size='small' color='default' />}
                 label="4"
                 labelPlacement="bottom"
               />
               <FormControlLabel
                 value="5"
-                control={<Radio color="primary" />}
+                control={<Radio size='small' color='default' />}
                 label="5"
                 labelPlacement="bottom"
               />
               <FormControlLabel
                 value="6"
-                control={<Radio color="primary" />}
+                control={<Radio size='small' color='default' />}
                 label="6"
                 labelPlacement="bottom"
               />
               <FormControlLabel
                 value="7"
-                control={<Radio color="primary" />}
+                control={<Radio size='small' color='default' />}
                 label="7"
                 labelPlacement="bottom"
               />
               <FormControlLabel
                 value="8"
-                control={<Radio color="primary" />}
+                control={<Radio size='small' color='default' />}
                 label="8"
                 labelPlacement="bottom"
               />
               <FormControlLabel
                 value="9"
-                control={<Radio color="primary" />}
+                control={<Radio size='small' color='default' />}
                 label="9"
                 labelPlacement="bottom"
               />
               <FormControlLabel
                 value="10"
-                control={<Radio color="primary" />}
+                control={<Radio size='small' color='default' />}
                 label="10"
                 labelPlacement="bottom"
               />
               <FormControlLabel
                 control={<div></div>}
                 label="Very Likely"
+                style={{marginLeft: '10px'}}
               />
             </RadioGroup>
             
+            <br/><br/>
             <Button
               style={{background: '#bed596', color: '#000000', margin: '5px',  paddingLeft: '35px', paddingRight: '35px'}}
               variant="contained"
@@ -225,7 +219,7 @@ function RecPage() {
    }
    else {
      return (
-       <div> Bhag Bosdike</div>
+       <div> Error fetching data</div>
      );
    }
 }

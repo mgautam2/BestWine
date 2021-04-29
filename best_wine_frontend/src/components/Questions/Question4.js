@@ -7,7 +7,7 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Input from '@material-ui/core/Input';
-
+import logo from '../../bestwine_logo.png'
 import { incrementPage, decrementPage, submitQues4 } from '../../redux/action';
 
 
@@ -39,17 +39,7 @@ function Question4() {
   return (
     <div>
       <AppBar position='static' style={{background: '#f8f1ed'}} >
-        <Typography variant='h5'
-          style={{
-            margin: '5px',
-            marginLeft: '10px',
-            justifyContent: 'center',
-            alignItems: 'center',
-            color: '#000000'
-          }}
-        >
-          BestWine
-        </Typography>
+        <img src={logo} style={{justifyContent: 'center', maxWidth: '150px'}}/>
       </AppBar>
 
       <div style={{background: '#f8f1ed', height: 'calc(100vh - 42px)'}}>
@@ -72,9 +62,9 @@ function Question4() {
           </Typography>
           <div style={{marginLeft: '5%', marginBottom: '5px'}}>
             <RadioGroup name='freq' value={freq} onChange={handleChange}>
-              <FormControlLabel value='1' control={<Radio />} label='Not at all Often' />
-              <FormControlLabel value='2' control={<Radio />} label='Somewhat Often' />
-              <FormControlLabel value='3' control={<Radio />} label='Very Often' />
+              <FormControlLabel value='1' control={<Radio size='small' color='default' />} label='Not at all Often' />
+              <FormControlLabel value='2' control={<Radio size='small' color='default' />} label='Somewhat Often' />
+              <FormControlLabel value='3' control={<Radio size='small' color='default' />} label='Very Often' />
             </RadioGroup>
           </div>
           
