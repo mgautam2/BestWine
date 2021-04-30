@@ -1,4 +1,3 @@
-
 FROM node:10-stretch-slim
 
 RUN apt-get update && apt-get install --yes python3 

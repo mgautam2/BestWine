@@ -1,0 +1,4 @@
+build: 
+  docker:
+    # server: /best_wine_backend/Dockerfile
+    client: /best_wine_frontend/Dockerfile

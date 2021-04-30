@@ -7,8 +7,6 @@ WORKDIR /srv/app/frontend
 COPY . /srv/app/frontend/
 
 RUN npm install
-
-
-# npm/webpack build here
+ 
 
 CMD ["npm", "start"]
