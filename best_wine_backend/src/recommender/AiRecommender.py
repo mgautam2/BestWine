@@ -1,6 +1,7 @@
 import json
 import math
 import sys
+import pathlib
 
 # TODO Take in json and url command line arguement. Select images for selected wines
 
@@ -46,22 +47,24 @@ class Request:
 
 def getWines(typePref):
     wines = []
+    dir = str(pathlib.Path().absolute())
+    
     if typePref == 'White' or typePref == 'No Pref':
-        with open('white_wine_data.txt') as f:
+        with open(dir +  '/white_wine_data.txt') as f:
             data = json.load(f)
         for i in range(len(data)):
             if data[i] not in wines:
                 wines.append(data[i])
 
     if typePref == 'Red' or typePref == 'No Pref':
-        with open('red_wine_data.txt') as f:
+        with open(dir + '/red_wine_data.txt') as f:
             data = json.load(f)
         for i in range(len(data)):
             if data[i] not in wines:
                 wines.append(data[i])
 
     if typePref == 'Rose' or typePref == 'No Pref':
-        with open('rose_wine_data.txt') as f:
+        with open(dir + '/rose_wine_data.txt') as f:
             data = json.load(f)
         for i in range(len(data)):
             if data[i] not in wines:
@@ -97,12 +100,12 @@ def scoreWinesPerActivity(userRequest, wineData, scoresDict):
                     scoresDict[wine['name']] = scoresDict[wine['name']] + 3
 
 def scoreWinesPerABV(userRequest, wineData, scoresDict):
-    desiredSweetness = userRequest.sweetness
+    desiredSweetness = (userRequest.sweetness)
     for wine in wineData:
         if 'abv' in wine:
             abvString = wine['abv'][0:2]
             abv = int(abvString.replace("%", ""))
-            score = 5 - ((abv / 17) * 10 - desiredSweetness)
+            score = 2#5 - ((abv / 17) * 10 - desiredSweetness)
             scoresDict[wine['name']] = scoresDict[wine['name']] + score
 
 def sortByScore(scoresDict, imageDict):
