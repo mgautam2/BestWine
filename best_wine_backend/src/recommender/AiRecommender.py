@@ -1,7 +1,8 @@
 import json
 import math
 import sys
-import pathlib
+import os
+
 
 # TODO Take in json and url command line arguement. Select images for selected wines
 
@@ -47,7 +48,8 @@ class Request:
 
 def getWines(typePref):
     wines = []
-    dir = str(pathlib.Path().absolute())
+    dir = os.path.dirname(os.path.abspath(__file__))
+    print(dir)
     
     if typePref == 'White' or typePref == 'No Pref':
         with open(dir +  '/white_wine_data.txt') as f:
@@ -142,7 +144,7 @@ def getAIRecommendedWines(filename, outputFile):
         outputs.append(sortByScore(wineScoreList, imageDict))
     
     f = open(outputFile, "w")
-    f.write(str(outputs))
+    f.write(json.dumps(outputs))
     f.close()
 
 def main():

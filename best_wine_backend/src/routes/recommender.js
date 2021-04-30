@@ -14,7 +14,7 @@ router.post("/recommendations", function(req, res, next) {
     const inputFilePath = path.join(__dirname, '../recommender/input.json');
     const outputFilePath = path.join(__dirname, '../recommender/output.json');
     const AIRecFilePath = path.join(__dirname, "../recommender/AiRecommender.py");
-    // const ExpertRecFilePath = path.join(__dirname, "p.py");
+    const ExpertRecFilePath = path.join(__dirname, "../recommender/ExpertRecommender.py");
     const { Color, Cost, Activities, Rating, ABV, Tannicity } = req.body;
     const data = { Color, Cost, Activities, Rating, ABV, Tannicity };
     const input = [data]
@@ -38,8 +38,8 @@ router.post("/recommendations", function(req, res, next) {
         fs.unlinkSync(outputFilePath);
       } catch (err) {
         console.log(err)
-        res.status(500).send(err);
-        return;
+        res.status(500).send(err); //err
+         return;
       }
       res.send({data:recData, reccNum: count});
       count++;

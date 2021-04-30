@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+
+# Server
+  server: 
+    build: "./best_wine_backend"
+    environment:
+        SERVER_PORT: 4000
+    ports:
+        - 4000:4000
+    volumes:
+        - ./best_wine_backend/src:/srv/app/backend/src
+
+#Client
+  
+  client:
+    build: "./best_wine_frontend"
+    environment:
+      CLIENT_PORT: 3000
+    ports:
+        - 3000:3000
+    volumes:
+      - ./best_wine_frontend/src:/srv/app/frontend/src
+    stdin_open: true
+
